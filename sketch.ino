@@ -12,7 +12,7 @@
 #define RES 65536 // 16 bit resolution: 2^16 = 65536
 
 // i2c address of mpu6050
-# define MPU_ADD 0x68
+#define MPU_ADD 0x68
 
 // registers addresses
 #define ACCEL_CONFIG 0x1C
@@ -139,7 +139,7 @@ uint16_t mergeHnL(byte H, byte L) { //HIGH: MSB, LOW: LSB
 float to_float(uint16_t bin) {
   uint16_t comp;
   float comp_f;
-  if (bin/32768>=1) { //identifies negative number (checks if bit 16 is 1)
+  if ((bin/(RES/2)>=1) { //identifies negative number (checks if MSB is 1)
     comp = ~bin;
     comp = comp+1;
     comp_f = float(comp);
